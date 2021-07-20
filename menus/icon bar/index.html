@@ -71,7 +71,7 @@
 
         position: relative;
       }
-      i {
+      .nav__link > i {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -79,7 +79,36 @@
       }
 
       .nav__link.current {
-        background: #04aa6d;
+        background: rgb(4, 170, 109);
+      }
+
+      nav.vertical-2 {
+        width: 100%;
+        background: rgb(85, 85, 85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .nav__menu-v-2 {
+        width: 70vmin;
+        display: flex;
+        justify-content: space-between;
+      }
+      .nav__item-2 {
+      }
+      .nav__link-2 {
+        display: block;
+        padding: calc((8vmax - 2rem) / 2) calc((70vmin - 10rem) / 10);
+      }
+      .nav__link-2.current {
+        background: rgb(4, 170, 109);
+      }
+      .nav__link-2 > i {
+        color: white;
+        font-size: 2rem;
+      }
+      .nav__link-2:hover {
+        background: black;
       }
     </style>
   </head>
@@ -119,6 +148,27 @@
         </li>
         <li class="nav__item">
           <a href="#" class="nav__link"><i class="fas fa-trash"></i></a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="vertical-2">
+      <ul class="nav__menu-v-2">
+        <li class="nav__item-2">
+          <a href="#" class="nav__link-2 current"
+            ><i class="fas fa-home 2"></i
+          ></a>
+        </li>
+        <li class="nav__item-2">
+          <a href="#" class="nav__link-2"><i class="fas fa-search 2"></i></a>
+        </li>
+        <li class="nav__item-2">
+          <a href="#" class="nav__link-2"><i class="fas fa-envelope 2"></i></a>
+        </li>
+        <li class="nav__item-2">
+          <a href="#" class="nav__link-2"><i class="fas fa-globe 2"></i></a>
+        </li>
+        <li class="nav__item-2">
+          <a href="#" class="nav__link-2"><i class="fas fa-trash 2"></i></a>
         </li>
       </ul>
     </nav>
