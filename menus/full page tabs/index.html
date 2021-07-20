@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>full page tabs</title>
+  </head>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      height: 100vh;
+      overflow: hidden;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+    }
+    button {
+      width: calc(100vw / 4);
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      padding: 1rem 0;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+    button:hover {
+      filter: brightness(90%);
+    }
+    button.active {
+      color: white;
+    }
+    button.home.active,
+    .content.home {
+      background: red;
+    }
+    button.news.active,
+    .content.news {
+      background: green;
+    }
+    button.contact.active,
+    .content.contact {
+      background: blue;
+    }
+    button.about.active,
+    .content.about {
+      background: orange;
+    }
+    .container {
+      height: 100%;
+    }
+    .content {
+      height: 100%;
+      color: white;
+      padding: 2rem 2rem;
+      display: none;
+    }
+    .content.active {
+      display: block;
+    }
+    h1 {
+      text-transform: capitalize;
+      margin-bottom: 1rem;
+    }
+  </style>
+  <body>
+    <div class="btn-group">
+      <button name="home" class="home">home</button>
+      <button name="news" class="news">news</button>
+      <button name="contact" class="contact">contact</button>
+      <button name="about" class="about">about</button>
+    </div>
+    <div class="container">
+      <div class="content-1 content home">
+        <h1>home</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit ratione
+          ex dolorem rerum quaerat obcaecati ut animi, magni modi impedit
+          architecto iure accusantium accusamus laborum error, deserunt iste.
+          Autem optio vel quae nihil delectus officia recusandae amet ea dolorem
+          eaque, neque quod magnam animi, quas harum consectetur! Asperiores
+          suscipit sed cumque adipisci itaque deleniti tempore facere ex maxime,
+          consequatur odit pariatur quibusdam molestiae aperiam recusandae
+          numquam officiis beatae dolores facilis! Molestias impedit
+          necessitatibus odio ea facilis, aperiam nulla cum perspiciatis illo
+          dolor?
+        </p>
+      </div>
+      <div class="content-2 content news">
+        <h1>news</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit ratione
+          ex dolorem rerum quaerat obcaecati ut animi, magni modi impedit
+          architecto iure accusantium accusamus laborum error, deserunt iste.
+          Autem optio vel quae nihil delectus officia recusandae amet ea dolorem
+          eaque, neque quod magnam animi, quas harum consectetur! Asperiores
+          suscipit sed cumque adipisci itaque deleniti tempore facere ex maxime,
+          consequatur odit pariatur quibusdam molestiae aperiam recusandae
+          numquam officiis beatae dolores facilis! Molestias impedit
+          necessitatibus odio ea facilis, aperiam nulla cum perspiciatis illo
+          dolor?
+        </p>
+      </div>
+      <div class="content-3 content contact">
+        <h1>contact</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit ratione
+          ex dolorem rerum quaerat obcaecati ut animi, magni modi impedit
+          architecto iure accusantium accusamus laborum error, deserunt iste.
+          Autem optio vel quae nihil delectus officia recusandae amet ea dolorem
+          eaque, neque quod magnam animi, quas harum consectetur! Asperiores
+          suscipit sed cumque adipisci itaque deleniti tempore facere ex maxime,
+          consequatur odit pariatur quibusdam molestiae aperiam recusandae
+          numquam officiis beatae dolores facilis! Molestias impedit
+          necessitatibus odio ea facilis, aperiam nulla cum perspiciatis illo
+          dolor?
+        </p>
+      </div>
+      <div class="content-4 content about">
+        <h1>about</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit ratione
+          ex dolorem rerum quaerat obcaecati ut animi, magni modi impedit
+          architecto iure accusantium accusamus laborum error, deserunt iste.
+          Autem optio vel quae nihil delectus officia recusandae amet ea dolorem
+          eaque, neque quod magnam animi, quas harum consectetur! Asperiores
+          suscipit sed cumque adipisci itaque deleniti tempore facere ex maxime,
+          consequatur odit pariatur quibusdam molestiae aperiam recusandae
+          numquam officiis beatae dolores facilis! Molestias impedit
+          necessitatibus odio ea facilis, aperiam nulla cum perspiciatis illo
+          dolor?
+        </p>
+      </div>
+    </div>
+  </body>
+  <script>
+    const contentBlocks = [...document.querySelectorAll(".content")],
+      buttons = document.querySelectorAll("button");
+    function toggleContent() {
+      this.classList.add("active");
+      buttons.forEach((btn) =>
+        btn !== this ? btn.classList.remove("active") : ""
+      );
+      const contentName = this.name;
+      contentBlocks.forEach((block) =>
+        !block.classList.contains(contentName)
+          ? block.classList.remove("active")
+          : block.classList.add("active")
+      );
+    }
+    buttons.forEach((btn) => btn.addEventListener("click", toggleContent));
+  </script>
+</html>
