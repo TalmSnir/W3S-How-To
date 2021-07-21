@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flip card</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .wrapper {
+        width: 300px;
+        height: 400px;
+
+        perspective: 1000px;
+      }
+      .container {
+        height: 100%;
+        width: 100%;
+        transform-style: preserve-3d;
+        transition: transform 1s ease-in-out;
+        position: relative;
+      }
+      .container:hover {
+        transform: rotateY(180deg);
+      }
+      .card__front,
+      .card__back {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+      }
+      .card__front img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .card__back {
+        transform: rotateY(180deg);
+        background: black;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .container:hover .card__back {
+        transform: rotateY(180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="card__front">
+          <img
+            src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+            alt="#"
+          />
+        </div>
+
+        <div class="card__back">
+          <h1>image description</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
+            quaerat eos ipsa provident corrupti ex, cum mollitia temporibus
+            nihil, iure debitis quis, alias architecto animi earum nesciunt
+            suscipit expedita dolor! Nam aliquid magni ducimus ullam incidunt
+            odio, perferendis, ipsum soluta delectus reprehenderit harum, ea
+            nulla mollitia cum itaque possimus. Deleniti harum ex libero quos
+            repellat esse atque tempore odit accusantium.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
