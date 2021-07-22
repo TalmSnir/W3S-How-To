@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>countDown Timer</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        font-size: 6rem;
+      }
+      .timer {
+        width: 80%;
+        height: 20vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .time-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+      }
+      .time-container:not(:last-child)::after {
+        content: ":";
+        position: absolute;
+        font-size: 4rem;
+        right: -1rem;
+        bottom: 0;
+      }
+      .text,
+      .content {
+        font-size: 3rem;
+      }
+      .text {
+        text-transform: uppercase;
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>countDown timer</h1>
+    <div class="timer">
+      <div class="days time-container">
+        <span class="text">days</span><span class="content">00</span>
+      </div>
+      <div class="hours time-container">
+        <span class="text">hr</span><span class="content">00</span>
+      </div>
+      <div class="minutes time-container">
+        <span class="text">min</span><span class="content">00</span>
+      </div>
+      <div class="seconds time-container">
+        <span class="text">sec</span><span class="content">00</span>
+      </div>
+    </div>
+    <script>
+      const days = document.querySelector(".days").querySelector(".content"),
+        hours = document.querySelector(".hours").querySelector(".content"),
+        minutes = document.querySelector(".minutes").querySelector(".content"),
+        seconds = document.querySelector(".seconds").querySelector(".content");
+      const requestedTime = new Date("july 22, 2021 15:45:59");
+      const eventTime = {
+        year: requestedTime.getFullYear(),
+        month: requestedTime.getMonth(),
+        day: requestedTime.getDate(),
+        hour: requestedTime.getHours(),
+        minutes: requestedTime.getMinutes(),
+        seconds: requestedTime.getSeconds(),
+      };
+
+      const timer = setInterval(() => {
+        let currentTime = new Date();
+        const isEnded = currentTime.getTime() >= requestedTime.getTime();
+        currentTime = {
+          year: currentTime.getFullYear(),
+          month: currentTime.getMonth(),
+          day: currentTime.getDate(),
+          hour: currentTime.getHours(),
+          minutes: currentTime.getMinutes(),
+          seconds: currentTime.getSeconds(),
+        };
+        const leftTime = {
+          years: eventTime.year - currentTime.year,
+          months: eventTime.month - currentTime.month,
+          days: eventTime.day - currentTime.day,
+          hours: eventTime.hour - currentTime.hour,
+          minutes: eventTime.minutes - currentTime.minutes,
+          seconds: eventTime.seconds - currentTime.seconds,
+        };
+
+        isEnded ? clearInterval(timer) : "";
+        if (!isEnded) {
+          days.textContent = addTrailingZero(leftTime.days);
+          hours.textContent = addTrailingZero(leftTime.hours);
+          minutes.textContent = addTrailingZero(leftTime.minutes);
+          seconds.textContent = addTrailingZero(leftTime.seconds);
+        }
+      }, 1000);
+      function addTrailingZero(time) {
+        const timeStringUpdated = time < 10 ? "0" + time.toString() : time;
+        return timeStringUpdated;
+      }
+    </script>
+  </body>
+</html>
