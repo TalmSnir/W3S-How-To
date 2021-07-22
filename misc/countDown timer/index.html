@@ -77,7 +77,7 @@
         hours = document.querySelector(".hours").querySelector(".content"),
         minutes = document.querySelector(".minutes").querySelector(".content"),
         seconds = document.querySelector(".seconds").querySelector(".content");
-      const requestedTime = new Date("july 22, 2021 15:45:59");
+      const requestedTime = new Date("july 22, 2021 15:50:20");
       const eventTime = {
         year: requestedTime.getFullYear(),
         month: requestedTime.getMonth(),
@@ -107,12 +107,17 @@
           seconds: eventTime.seconds - currentTime.seconds,
         };
 
-        isEnded ? clearInterval(timer) : "";
         if (!isEnded) {
           days.textContent = addTrailingZero(leftTime.days);
           hours.textContent = addTrailingZero(leftTime.hours);
           minutes.textContent = addTrailingZero(leftTime.minutes);
           seconds.textContent = addTrailingZero(leftTime.seconds);
+        } else {
+          days.textContent = "00";
+          hours.textContent = " 00";
+          minutes.textContent = "00";
+          seconds.textContent = "00";
+          clearInterval(timer);
         }
       }, 1000);
       function addTrailingZero(time) {
