@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images slideshow</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .main-wrapper {
+        position: relative;
+        width: 80vw;
+      }
+      .wrapper {
+        height: 70vh;
+        overflow: hidden;
+      }
+      .slideshow-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        transition: transform 1s ease;
+      }
+      img {
+        width: 80vw;
+        height: auto;
+        object-fit: cover;
+      }
+      button {
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        padding: 1rem;
+        border-radius: 50%;
+        border: none;
+        background: #000;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+      .prev {
+        left: 0;
+        transform: translate(-50%, -50%);
+      }
+      .next {
+        right: 0;
+        transform: translate(50%, -50%);
+      }
+      .slideShow-indicators {
+        margin: 2rem auto 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+      }
+      .indicator {
+        height: 1.4rem;
+        width: 1.4rem;
+        border-radius: 50%;
+        background: rgb(191, 189, 189);
+      }
+      .indicator.active {
+        background: rgb(107, 106, 106);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="wrapper">
+        <button class="prev"><=</button>
+        <button class="next">=></button>
+        <div class="slide-number">1/5</div>
+
+        <div class="slideshow-container">
+          <img
+            src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=60"
+            alt=""
+            class="slide-1"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1626889306396-b5731d0a5886?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=60"
+            alt=""
+            class="slide-2"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1626938929084-9a208ef71966?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=60"
+            alt=""
+            class="slide-3"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1621192488040-c91d793fb659?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=60"
+            alt=""
+            class="slide-4"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1606787364406-a3cdf06c6d0c?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=60"
+            alt=""
+            class="slide-5"
+          />
+        </div>
+      </div>
+      <div class="slideShow-indicators">
+        <span class="indicator active"></span>
+        <span class="indicator"></span><span class="indicator"> </span
+        ><span class="indicator"></span><span class="indicator"></span>
+      </div>
+    </div>
+    <script>
+      const wrapper = document.querySelector(".main-wrapper"),
+        slideShowContainer = document.querySelector(".slideshow-container"),
+        images = Array.from(slideShowContainer.children),
+        btnNext = document.querySelector(".next"),
+        btnPrev = document.querySelector(".prev"),
+        indicators = [
+          ...document.querySelector(".slideShow-indicators").children,
+        ],
+        slideNumber = document.querySelector(".slide-number");
+
+      let wrapperWidth = wrapper.offsetWidth;
+      let idx = 0;
+      console.log(wrapperWidth);
+
+      function slideRight() {
+        idx == images.length - 1 ? (idx = 0) : (idx += 1);
+        slideShowContainer.style.setProperty(
+          "transform",
+          `translateX(${-wrapperWidth * idx}px`
+        );
+        setIndicators();
+      }
+      function slideLeft() {
+        idx == 0 ? (idx = images.length - 1) : (idx -= 1);
+        slideShowContainer.style.setProperty(
+          "transform",
+          `translateX(${-wrapperWidth * idx}px`
+        );
+        setIndicators();
+      }
+      function setIndicators() {
+        indicators[idx].classList.add("active");
+        indicators
+          .filter((indicator, i) => i != idx)
+          .forEach((indicator) => indicator.classList.remove("active"));
+        slideNumber.textContent = `${idx + 1}/${images.length}`;
+      }
+      btnNext.addEventListener("click", slideRight);
+      btnPrev.addEventListener("click", slideLeft);
+      window.addEventListener("resize", () => {
+        wrapperWidth = wrapper.offsetWidth;
+        slideShowContainer.style.setProperty(
+          "transform",
+          `translateX(${-wrapperWidth * idx}px`
+        );
+      });
+    </script>
+  </body>
+</html>
